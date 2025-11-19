@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SiswaCsvExport;
 use App\Exports\SiswaExport;
 use App\Models\Siswa;
 use App\Models\Lembaga;
@@ -151,14 +152,15 @@ class SiswaController extends Controller
     public function export(Request $request)
     {
         $filters = [
-            'search'     => $request->search,
-            'lembaga_id' => $request->lembaga_id,
+            'lembaga_id' => $request->get('lembaga_id'),
+            'search' => $request->get('search'),
         ];
 
-        $filename = 'siswa_export_' . date('Ymd_His') . '.xlsx';
+        $file = SiswaCsvExport::generate($filters);
 
-        return Excel::download(new SiswaExport($filters), $filename);
+        return response()->download($file)->deleteFileAfterSend(true);
     }
+
 
 
 }
