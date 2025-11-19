@@ -23,11 +23,8 @@
             "require": {
                 "php": "^8.2"
             },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.2",
-                "phpstan/phpstan": "2.1.22",
-                "phpunit/phpunit": "^11.5"
-            },
+            "require-dev": {}
+            ,
             "type": "library",
             "autoload": {
                 "psr-4": {
